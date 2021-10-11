@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'account',
+    'app',
 ]
 
 MIDDLEWARE = [
@@ -122,3 +123,9 @@ STATIC_URL = '/static/'
 
 #カスタムユーザーを認識させる
 AUTH_USER_MODEL = 'account.User'
+
+#ログイン設定
+LOGIN_URL = 'app:login'
+LOGIN_REDIRECT_URL = 'app:login'
+LOGOUT_REDIRECT_URL = 'app:login'
+
