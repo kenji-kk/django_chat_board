@@ -126,6 +126,6 @@ AUTH_USER_MODEL = 'account.User'
 
 #ログイン設定
 LOGIN_URL = 'app:login'
-LOGIN_REDIRECT_URL = 'app:login'
+LOGIN_REDIRECT_URL = 'app:userdetail'
 LOGOUT_REDIRECT_URL = 'app:login'
 
