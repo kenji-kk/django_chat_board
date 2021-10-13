@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, get_user_model
 from .forms import CustomUserCreationForm, ChatBoard
 from django.contrib.auth.decorators import login_required
+from .models import ChatBoard
 
 
 def signup(request):
@@ -46,3 +47,6 @@ def create_board(request):
     form = ChatBoard()
   return render(request, 'app/createboard.html', {'form': form})
 
+def timeline(request):
+  chat_boards = ChatBoard.objects.all()
+  return render(request, 'app/timeline.html', {'chat_boards': chat_boards})
