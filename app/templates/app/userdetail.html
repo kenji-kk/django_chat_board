@@ -1,4 +1,5 @@
 {% extends 'app/base.html' %} {% block content %}
+<h1>ユーザーページ</h1>
 <p>ユーザーID：{{user_object.id}}</p>
 <p>ユーザーネーム：{{user_object.username}}</p>
 <p><a href="{% url 'app:logout' %}">ログアウト</a></p>
