@@ -32,6 +32,8 @@ def user_detail(request):
   chat_boards = user_object.chatboard_set.all
   return render(request, 'app/userdetail.html', {'user_object': user_object, 'chat_boards': chat_boards})
 
+  
+@login_required 
 def create_board(request):
   if request.method == 'POST':
     form = ChatBoard(request.POST)
