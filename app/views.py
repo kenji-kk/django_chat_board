@@ -26,9 +26,11 @@ def signup(request):
 @login_required
 def user_detail(request):
   user = request.user
+  #この下の2行いらないかも,request.userに全部含まれるため
   userclass = get_user_model()
   user_object = get_object_or_404(userclass , id=user.id)
-  return render(request, 'app/userdetail.html', {'user_object': user_object})
+  chat_boards = user_object.chatboard_set.all
+  return render(request, 'app/userdetail.html', {'user_object': user_object, 'chat_boards': chat_boards})
 
 def create_board(request):
   if request.method == 'POST':
@@ -37,7 +39,7 @@ def create_board(request):
       chat_board = form.save(commit=False)
       chat_board.user = request.user
       chat_board.save()
-      return redirect('app:user_detail')
+      return redirect('app:userdetail')
   else:
     form = ChatBoard()
   return render(request, 'app/createboard.html', {'form': form})

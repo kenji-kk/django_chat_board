@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 class ChatBoard(models.Model):
 
   board_title = models.CharField(max_length=100)
-  user = models.OneToOneField(
+  user = models.ForeignKey(
     get_user_model(),
     on_delete=models.CASCADE
   )
