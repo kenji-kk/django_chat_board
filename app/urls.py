@@ -8,6 +8,8 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('userdetail/', views.user_detail, name='userdetail'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-    path('createboard', views.create_board, name='createboard'),
-    path('timeline/', views.timeline, name='timeline')
+    path('createboard/', views.create_board, name='createboard'),
+    path('timeline/', views.timeline, name='timeline'),
+    path('chatcontent/<int:pk>', views.chatcontent, name='chatcontent'),
+    path('createcomment/<int:board_id>', views.createcomment, name='createcomment')
 ]
