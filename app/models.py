@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from .models import ChatBoard
 
 class ChatBoard(models.Model):
 
@@ -23,6 +24,6 @@ class ChatContent(models.Model):
   comment =  models.CharField(max_length=200)
   created_at = models.DateTimeField('コメント日', auto_now_add=True)
   chat_board = models.ForeignKey(
-    models.ChatBoard,
+    ChatBoard,
     on_delete=models.CASCADE
   )
