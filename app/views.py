@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, get_user_model
-from .forms import CustomUserCreationForm 
+from .forms import CustomUserCreationForm, FormChatContent
 from .forms import ChatBoard as FormChatBoard
 from django.contrib.auth.decorators import login_required
 from .models import ChatBoard
@@ -54,7 +54,25 @@ def timeline(request):
 
 
 def chatcontent(request, pk):
+  form = FormChatContent()
   chat_board = ChatBoard.objects.get(id = pk)
-  chat_comments = chat_board.chatcontent_set.all
-  return render(request, 'app/chatcontent.html', {'chat_comments': chat_comments})
-  
+  chat_comments = chat_board.chatcontent_set.all()
+  print(chat_comments)
+  return render(request, 'app/chatcontent.html', {'chat_comments': chat_comments,'form': form, 'chat_board': chat_board})
+
+
+def createcomment(request, board_id):
+  if request.method == 'POST':
+    user = request.user
+    #この下の2行いらないかも,request.userに全部含まれるため
+    userclass = get_user_model()
+    user_object = get_object_or_404(userclass , id=user.id)
+    chat_board = ChatBoard.objects.get(id = board_id)
+    form = FormChatContent(request.POST)
+    if form.is_valid():
+      chat_comment = form.save(commit=False)
+      chat_comment.user_name = user_object
+      chat_comment.chat_board = chat_board
+      chat_comment.save()
+    return redirect('app:chatcontent', pk=board_id )
+
