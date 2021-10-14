@@ -19,7 +19,7 @@ def signup(request):
       )
       if new_user is not None:
         login(request, new_user)
-        return redirect('app:user_detail')
+        return redirect('app:userdetail')
   else:
     form = CustomUserCreationForm()
   return render(request, 'app/signup.html', {'form': form})
