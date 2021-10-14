@@ -51,3 +51,10 @@ def create_board(request):
 def timeline(request):
   chat_boards = ChatBoard.objects.all()
   return render(request, 'app/timeline.html', {'chat_boards': chat_boards})
+
+
+def chatcontent(request, pk):
+  chat_board = ChatBoard.objects.get(id = pk)
+  chat_comments = chat_board.chatcontent_set.all
+  return render(request, 'app/chatcontent.html', {'chat_comments': chat_comments})
+  

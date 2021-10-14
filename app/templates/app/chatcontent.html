@@ -1,0 +1,5 @@
+{% extends 'app/base.html' %} {% block content %}
+<h1>チャットルーム</h1>
+{% for chat_content in chat_contents %}
+<p>{{chat_content.commtent}}</p>
+{% endfor %}{% endblock %}
