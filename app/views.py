@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, get_user_model
-from .forms import CustomUserCreationForm, ChatBoard
+from .forms import CustomUserCreationForm 
+from .forms import ChatBoard as FormChatBoard
 from django.contrib.auth.decorators import login_required
 from .models import ChatBoard
 
@@ -37,14 +38,14 @@ def user_detail(request):
 @login_required 
 def create_board(request):
   if request.method == 'POST':
-    form = ChatBoard(request.POST)
+    form = FormChatBoard(request.POST)
     if form.is_valid():
       chat_board = form.save(commit=False)
       chat_board.user = request.user
       chat_board.save()
       return redirect('app:userdetail')
   else:
-    form = ChatBoard()
+    form = FormChatBoard()
   return render(request, 'app/createboard.html', {'form': form})
 
 def timeline(request):
