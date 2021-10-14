@@ -12,3 +12,17 @@ class ChatBoard(models.Model):
 
   def __str__(self):
     return self.title
+
+
+class ChatContent(models.Model):
+
+  user_name = models.ForeignKey(
+    get_user_model(),
+    on_delete=models.CASCADE
+  )
+  comment =  models.CharField(max_length=200)
+  created_at = models.DateTimeField('コメント日', auto_now_add=True)
+  chat_board = models.ForeignKey(
+    models.ChatBoard,
+    on_delete=models.CASCADE
+  )
