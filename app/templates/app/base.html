@@ -44,7 +44,7 @@
                 <use xlink:href="#bootstrap" />
               </svg>
             </a>
-
+            <p>　　　　　　　　</p>
             <ul
               class="
                 nav
@@ -55,27 +55,35 @@
                 mb-md-0
               "
             >
-              <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
-              <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
-              <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
-              <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-              <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+              <li>
+                <a
+                  href="{% url 'app:timeline'%}"
+                  class="nav-link px-2 text-white"
+                  >タイムライン</a
+                >
+              </li>
+              <li>
+                <a
+                  href="{% url 'app:createboard'%}"
+                  class="nav-link px-2 text-white"
+                  >話題作成ページ</a
+                >
+              </li>
+              <li>
+                <a
+                  href="{% url 'app:userdetail' %}"
+                  class="nav-link px-2 text-white"
+                  >マイページ</a
+                >
+              </li>
             </ul>
-
-            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-              <input
-                type="search"
-                class="form-control form-control-dark"
-                placeholder="Search..."
-                aria-label="Search"
-              />
-            </form>
-
+            <p>　　　　　　　　　　　　　</p>
             <div class="text-end">
-              <button type="button" class="btn btn-outline-light me-2">
-                Login
-              </button>
-              <button type="button" class="btn btn-warning">Sign-up</button>
+              <form action="{% url 'app:logout'%}">
+                <button type="submit" class="btn btn-warning">
+                  ログアウト
+                </button>
+              </form>
             </div>
           </div>
         </div>
