@@ -1,4 +1,4 @@
-{% extends 'app/base.html' %} {% block content %}
+{% extends 'app/base_auth.html' %} {% block content %}
 <form class="form-signin" method="POST">
   {% csrf_token %} {% if form.errors %}
   <p>ユーザー名かパスワードが間違っています。</p>
