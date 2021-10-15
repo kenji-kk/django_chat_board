@@ -1,19 +1,53 @@
 {% extends 'app/base_auth.html' %} {% block content %}
 
-<h2>ユーザー登録</h2>
-
-<form method="post" action="{% url 'app:signup' %}">
-  {% csrf_token %}
-  <label>メールアドレス</label>
-  {{ form.email }} {{ form.email.errors }}
+<br />
+<br />
+<div class="container">
+  <h1 class="h1 mb-3 font-weight-normal">掲示板サイト</h1>
   <br />
-  <labe>パスワード</labe>
-  {{ form.password1 }} {{ form.password1.errors}}
   <br />
-  <label>パスワード(確認)</label>
-  {{ form.password2 }} {{ form.password2.errors }}
-  <br />
-  <input type="submit" value="登録する" />
-</form>
-
-{% endblock %}
+  <form class="form-signin" method="POST" action="{% url 'app:signup' %}">
+    {% csrf_token %}
+    <h1 class="h3 mb-3 font-weight-normal">アカウント作成</h1>
+    <label for="inputEmail" class="sr-only">メールアドレス</label>
+    <input
+      type="email"
+      id="inputEmail"
+      class="form-control"
+      placeholder="メールアドレス"
+      required
+      autofocus
+      name="email"
+    />
+    {{ form.email.errors }}
+    <label for="inputPassword" class="sr-only">パスワード</label>
+    <input
+      type="password"
+      id="inputPassword"
+      class="form-control"
+      placeholder="パスワード"
+      required
+      name="password1"
+    />
+    {{ form.password1.errors}}
+    <label for="inputPassword" class="sr-only">パスワード確認</label>
+    <input
+      type="password"
+      id="inputPassword"
+      class="form-control"
+      placeholder="パスワード確認"
+      required
+      name="password2"
+    />
+    {{ form.password2.errors }}
+    <div class="checkbox mb-3">
+      <p>
+        <a href="{% url 'app:login'%}">アカウントをお持ちの方はこちら</a>
+      </p>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">
+      ログイン
+    </button>
+  </form>
+</div>
+{% endblock content %}
