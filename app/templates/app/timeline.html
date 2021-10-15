@@ -1,13 +1,15 @@
 {% extends 'app/base.html' %} {% block content %}
-<h1>タイムライン</h1>
-{% for chat_board in chat_boards %}
-<p>
-  話題：
-  <a href="{% url 'app:chatcontent' pk=chat_board.id %}">
-    {{chat_board.board_title}}
-  </a>
-</p>
-<p>作成者:{{chat_board.user.username}}</p>
-<p>作成日:{{chat_board.created_at}}</p>
-<hr />
-{% endfor %}{% endblock %}
+<div class="container">
+  <h1>タイムライン</h1>
+  {% for chat_board in chat_boards %}
+  <p>
+    話題：
+    <a href="{% url 'app:chatcontent' pk=chat_board.id %}">
+      {{chat_board.board_title}}
+    </a>
+  </p>
+  <p>作成者: {{chat_board.user.username}}</p>
+  <p>作成日: {{chat_board.created_at}}</p>
+  <hr />
+  {% endfor %}{% endblock %}
+</div>
