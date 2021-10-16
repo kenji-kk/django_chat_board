@@ -1,14 +1,22 @@
 {% extends 'app/base.html' %} {% block content %}
-<h1>チャットルーム</h1>
-<form
-  method="post"
-  action="{% url 'app:createcomment' board_id=chat_board.id%}"
->
-  {% csrf_token %}
-  <label>コメントをする</label>
-  {{form.comment}}{{form.comment.error}}
-  <input type="submit" value="コメントする" />
-</form>
-{% for chat_comment in chat_comments %}
-<p>{{chat_comment.comment}}</p>
-{% endfor %}{% endblock %}
+<div class="container">
+  <h1>チャットルーム</h1>
+  <form
+    method="post"
+    action="{% url 'app:createcomment' board_id=chat_board.id%}"
+  >
+    {% csrf_token %}
+    <label>コメントをする</label>
+    {{form.comment}}{{form.comment.error}}
+    <input type="submit" value="コメントする" />
+  </form>
+  <br />
+  <br />
+  <hr />
+  {% for chat_comment in chat_comments %}
+  <p>ユーザー名: {{chat_comment.user_name.username}}</p>
+  <p>　　　　　　　　　　　　　　　　コメント: {{chat_comment.comment}}</p>
+  <p>投稿日: {{chat_comment.created_at}}</p>
+  <hr />
+  {% endfor %}{% endblock %}
+</div>

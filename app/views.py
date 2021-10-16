@@ -43,14 +43,15 @@ def create_board(request):
       chat_board = form.save(commit=False)
       chat_board.user = request.user
       chat_board.save()
-      return redirect('app:userdetail')
-  else:
-    form = FormChatBoard()
-  return render(request, 'app/createboard.html', {'form': form})
+      chat_boards = ChatBoard.objects.all()
+      form = FormChatBoard()
+      return render(request, 'app/timeline.html', {'chat_boards': chat_boards,'form':form})
+  return render(request, 'app/timeline.html', {'form': form})
 
 def timeline(request):
   chat_boards = ChatBoard.objects.all()
-  return render(request, 'app/timeline.html', {'chat_boards': chat_boards})
+  form = FormChatBoard()
+  return render(request, 'app/timeline.html', {'chat_boards': chat_boards,'form':form})
 
 
 def chatcontent(request, pk):

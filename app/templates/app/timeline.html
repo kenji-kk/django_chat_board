@@ -1,9 +1,24 @@
 {% extends 'app/base.html' %} {% block content %}
-<h1>タイムライン</h1>
-{% for chat_board in chat_boards %}
-<p>
-  <a href="{% url 'app:chatcontent' pk=chat_board.id %}">
-    {{chat_board.board_title}}
-  </a>
-</p>
-{% endfor %}{% endblock %}
+<div class="container">
+  <br />
+  <h1>タイムライン</h1>
+  <br />
+  <form method="post" action="{% url 'app:createboard' %}">
+    {% csrf_token %}
+    <label>話題作成</label>
+    {{ form.board_title }} {{ form.board_title.errors }}
+    <input type="submit" value="作成する" />
+  </form>
+  <hr />
+  {% for chat_board in chat_boards %}
+  <p>
+    話題：
+    <a href="{% url 'app:chatcontent' pk=chat_board.id %}">
+      {{chat_board.board_title}}
+    </a>
+  </p>
+  <p>作成者: {{chat_board.user.username}}</p>
+  <p>作成日: {{chat_board.created_at}}</p>
+  <hr />
+  {% endfor %}{% endblock %}
+</div>

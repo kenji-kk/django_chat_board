@@ -1,8 +1,21 @@
 {% extends 'app/base.html' %} {% block content %}
-<h1>ユーザーページ</h1>
-<p>ユーザーID：{{user_object.id}}</p>
-<p>ユーザーネーム：{{user_object.username}}</p>
-<p><a href="{% url 'app:logout' %}">ログアウト</a></p>
-{% for chat_board in chat_boards %}
-<p>{{chat_board.board_title}}</p>
-{% endfor %} {% endblock %}
+<div class="container">
+  <br />
+  <h1>ユーザーページ</h1>
+  <hr />
+  <p>ユーザーID：{{user_object.id}}</p>
+  <p>ユーザーネーム：{{user_object.username}}</p>
+  <hr />
+  <br />
+  <br />
+  <p>自分で立てた話題↓</p>
+  <br />
+  {% for chat_board in chat_boards %}
+  <p>
+    <a href="{% url 'app:chatcontent' pk=chat_board.id %}"
+      >{{chat_board.board_title}}</a
+    >
+  </p>
+  {% endfor %}
+</div>
+{% endblock %}
