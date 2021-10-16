@@ -26,6 +26,12 @@ def signup(request):
 
 
 @login_required
+def user_details(request,pk):
+    user_object = get_object_or_404(get_user_model() , id=pk)
+    chat_boards = user_object.chatboard_set.all
+    return render(request, 'app/userdetail.html', {'user_object': user_object, 'chat_boards': chat_boards})
+
+@login_required
 def user_detail(request):
   user = request.user
   #この下の2行いらないかも,request.userに全部含まれるため
@@ -33,6 +39,7 @@ def user_detail(request):
   user_object = get_object_or_404(userclass , id=user.id)
   chat_boards = user_object.chatboard_set.all
   return render(request, 'app/userdetail.html', {'user_object': user_object, 'chat_boards': chat_boards})
+  
 
   
 @login_required 

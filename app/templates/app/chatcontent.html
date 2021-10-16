@@ -14,7 +14,12 @@
   <br />
   <hr />
   {% for chat_comment in chat_comments %}
-  <p>ユーザー名: {{chat_comment.user_name.username}}</p>
+  <p>
+    ユーザー名:
+    <a href="{% url 'app:userdetails' pk=chat_comment.user_name.id %}"
+      >{{chat_comment.user_name.username}}</a
+    >
+  </p>
   <p>　　　　　　　　　　　　　　　　コメント: {{chat_comment.comment}}</p>
   <p>投稿日: {{chat_comment.created_at}}</p>
   <hr />

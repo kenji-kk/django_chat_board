@@ -14,10 +14,15 @@
   <p>
     話題：
     <a href="{% url 'app:chatcontent' pk=chat_board.id %}">
-      {{chat_board.board_title}}
+      『{{chat_board.board_title}}』
     </a>
   </p>
-  <p>作成者: {{chat_board.user.username}}</p>
+  <p>
+    作成者:
+    <a href="{% url 'app:userdetails' pk=chat_board.user.id %}"
+      >{{chat_board.user.username}}</a
+    >
+  </p>
   <p>作成日: {{chat_board.created_at}}</p>
   <hr />
   {% endfor %}{% endblock %}
