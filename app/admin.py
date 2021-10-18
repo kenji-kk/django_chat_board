@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import ChatBoard, ChatContent
 
-# Register your models here.
+
+admin.site.register(ChatBoard)
+admin.site.register(ChatContent)

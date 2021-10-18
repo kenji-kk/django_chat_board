@@ -40,6 +40,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email address'), unique=True)
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
     last_name = models.CharField(_('last name'), max_length=150, blank=True)
+    user_name = models.CharField(_('user name'), max_length=150, blank=True)
+    
 
     is_staff = models.BooleanField(
         _('staff status'),
@@ -56,6 +58,17 @@ class User(AbstractBaseUser, PermissionsMixin):
         ),
     )
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
+    
+    #follow関係のフィールド
+    followees = models.ManyToManyField(
+        'User', verbose_name='フォロー中のユーザー', through='FriendShip',
+        related_name='+', through_fields=('follower', 'followee')
+    )
+    followers = models.ManyToManyField(
+        'User', verbose_name='フォローされているユーザー', through='FriendShip', 
+        related_name='+', through_fields=('followee', 'follower')
+    )
+
 
     objects = CustomUserManager()
 
@@ -89,3 +102,10 @@ class User(AbstractBaseUser, PermissionsMixin):
         メールアドレスを返す
         """
         return self.email
+
+class FriendShip(models.Model):
+    follower = models.ForeignKey('User', on_delete=models.CASCADE, related_name='followee_friendships')
+    followee = models.ForeignKey('User', on_delete=models.CASCADE, related_name='follower_friendships')
+
+    class Meta:
+        unique_together = ('follower', 'followee')
