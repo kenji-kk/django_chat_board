@@ -1,21 +1,32 @@
-{% extends 'app/base.html' %} {% block content %}
-<div class="container">
-  <br />
-  <h1>ユーザーページ</h1>
-  <hr />
-  <p>ユーザーID：{{user_object.id}}</p>
-  <p>ユーザーネーム：{{user_object.username}}</p>
-  <hr />
-  <br />
-  <br />
-  <p>自分で立てた話題↓</p>
-  <br />
-  {% for chat_board in chat_boards %}
-  <p>
-    <a href="{% url 'app:chatcontent' pk=chat_board.id %}"
-      >{{chat_board.board_title}}</a
-    >
-  </p>
-  {% endfor %}
-</div>
+{% extends 'app/base.html' %} 
+{% block content %}
+  <div class="container">
+    <br />
+    <h1>ユーザーページ</h1>
+    <hr />
+    <p>ユーザーID：{{user_object.id}}</p>
+    <p>ユーザーネーム：{{user_object.username}}</p>
+    <hr />
+    {%if request.user.id != user_object.id %}
+      {% if not request_user in followers%}
+        <p><a href="{% url 'app:follow' follower_id=user_object.id %}">フォローする</a></p>
+      {% else %}
+        <p><a href="{% url 'app:unfollow' follower_id=user_object.id %}">フォロー解除</a></p>
+      {% endif %}
+    {% endif %}
+    {% for followee in followees%}
+      <p> {{ followee.username }}</p>
+    {% endfor %}
+    <hr />
+    <br />
+    <p>自分で立てた話題↓</p>
+    <br />
+    {% for chat_board in chat_boards %}
+      <p>
+        <a href="{% url 'app:chatcontent' pk=chat_board.id %}"
+          >{{chat_board.board_title}}</a
+        >
+      </p>
+    {% endfor %}
+  </div>
 {% endblock %}
