@@ -11,7 +11,7 @@ class ChatBoard(models.Model):
   created_at = models.DateTimeField('登録日時', auto_now_add=True)
 
   def __str__(self):
-    return self.title
+    return self.board_title
 
 
 class ChatContent(models.Model):
@@ -26,3 +26,6 @@ class ChatContent(models.Model):
     ChatBoard,
     on_delete=models.CASCADE
   )
+
+  def __str__(self):
+    return self.comment
