@@ -14,5 +14,6 @@ urlpatterns = [
     path('chatcontent/<int:pk>', views.chatcontent, name='chatcontent'),
     path('createcomment/<int:board_id>', views.createcomment, name='createcomment'),
     path('follow/<int:follower_id>', views.follow, name='follow'),
-    path('unfollow/<int:follower_id>', views.unfollow, name='unfollow')
+    path('unfollow/<int:follower_id>', views.unfollow, name='unfollow'),
+    path('followees/<int:pk>', views.followees, name='followees'),
 ]
