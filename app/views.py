@@ -107,3 +107,9 @@ def followees(request, pk):
   user_object = get_object_or_404(userclass, id=pk)
   followees = user_object.followees.all()
   return render(request, 'app/followees.html', {'followees': followees})
+
+def followers(request, pk):
+  userclass = get_user_model()
+  user_object = get_object_or_404(userclass, id=pk)
+  followers = user_object.followers.all()
+  return render(request, 'app/followers.html', {'followers': followers})
