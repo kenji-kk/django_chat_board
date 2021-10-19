@@ -15,5 +15,5 @@ urlpatterns = [
     path('createcomment/<int:board_id>', views.createcomment, name='createcomment'),
     path('follow/<int:follower_id>', views.follow, name='follow'),
     path('unfollow/<int:follower_id>', views.unfollow, name='unfollow'),
-    path('followees/<int:user_id>', views.followees, name='followees')
+    path('followees/<int:pk>', views.followees, name='followees'),
 ]

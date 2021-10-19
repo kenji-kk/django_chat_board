@@ -14,9 +14,7 @@
         <p><a href="{% url 'app:unfollow' follower_id=user_object.id %}">フォロー解除</a></p>
       {% endif %}
     {% endif %}
-    {% for followee in followees%}
-      <p> {{ followee.username }}</p>
-    {% endfor %}
+    <p><a href="{% url 'app:followees' pk=user_object.id %}">フォロー</a></p>
     <hr />
     <br />
     <p>自分で立てた話題↓</p>

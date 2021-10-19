@@ -102,4 +102,8 @@ def unfollow(request, follower_id):
   relation.delete()
   return redirect('app:userdetails', pk=follower_id )
 
-
+def followees(request, pk):
+  userclass = get_user_model()
+  user_object = get_object_or_404(userclass, id=pk)
+  followees = user_object.followees.all()
+  return render(request, 'app/followees.html', {'followees': followees})
